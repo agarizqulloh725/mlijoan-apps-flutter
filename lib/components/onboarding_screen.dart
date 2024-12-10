@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../pages/home_screen.dart';
 
 class OnboardingScreen extends StatefulWidget {
   @override
@@ -39,12 +40,12 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 buildPageContent(
                   title: 'Welcome to Our Application',
                   body: 'This is the first page of onboarding.',
-                  image: 'assets/onboarding1.png',
+                  image: 'assets/images/onboarding1.png',
                 ),
                 buildPageContent(
                   title: 'Explore Features',
                   body: 'This is the second page of onboarding.',
-                  image: 'assets/onboarding2.png',
+                  image: 'assets/images/onboarding1.png',
                 ),
               ],
             ),
@@ -99,7 +100,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         child: Text('Get Started'),
         onPressed: () async {
           await setSeenOnboard();
-          Navigator.of(context).pushReplacementNamed('/home');
+          Navigator.of(context).pushReplacement(
+            MaterialPageRoute(builder: (context) => HomeScreen())
+          );
         },
       ),
     );
