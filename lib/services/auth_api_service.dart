@@ -6,58 +6,25 @@ import '../models/user.dart';
 class AuthApiService {
   final String baseUrl = "https://api.mlijoan.com/api/v1/auth/";
 
+  User? _currentUser;
+
+  User? get currentUser => _currentUser;
+
   Future<bool> login(String identifier, String password) async {
-    var fullUrl = Uri.parse(baseUrl + 'login');
-    print('Request URL: $fullUrl');
-
+    var fullUrl = Uri.parse('${baseUrl}login');
     var requestBody = jsonEncode({'identifier': identifier, 'password': password});
-    print('Request Body: $requestBody');
     var response = await http.post(
       fullUrl,
       headers: {'Content-Type': 'application/json'},
       body: requestBody,
     );
-    print('HTTP Response: $response');
 
     if (response.statusCode == 200) {
       var data = json.decode(response.body);
-      print('Response Data: $data');
-
       await Storage.setToken(data['access_token']);
+      await _fetchUserDetails();
       return true;
     } else {
-      print('Login failed with status code: ${response.statusCode}');
-    }
-    return false;
-  }
-
-  Future<bool> register(String name, String phone, String email, String password) async {
-    var fullUrl = Uri.parse(baseUrl + 'register');
-    print('Request URL: $fullUrl');
-
-    var requestBody = jsonEncode({
-      'name': name,
-      'phone': phone,
-      'email': email,
-      'password': password
-    });
-    print('Request Body: $requestBody');
-
-    var response = await http.post(
-      fullUrl,
-      headers: {'Content-Type': 'application/json'},
-      body: requestBody,
-    );
-    print('HTTP Response: $response');
-
-    if (response.statusCode == 200) {
-      var data = json.decode(response.body);
-      print('Response Data: $data');
-
-      await Storage.setToken(data['access_token']);
-      return true;
-    } else {
-      print('Registration failed with status code: ${response.statusCode}');
       return false;
     }
   }
@@ -65,64 +32,24 @@ class AuthApiService {
   Future<void> logout() async {
     var token = await Storage.getToken();
     if (token != null) {
-      var fullUrl = Uri.parse(baseUrl + 'logout');
-      var response = await http.post(
+      var fullUrl = Uri.parse('${baseUrl}logout');
+      await http.post(
         fullUrl,
         headers: {
           'Content-Type': 'application/json',
           'Authorization': 'Bearer $token',
         },
       );
-      print('Logout HTTP Response: $response');
     }
     await Storage.deleteToken();
+    _currentUser = null;
   }
 
-  Future<bool> refresh() async {
+  Future<void> _fetchUserDetails() async {
     var token = await Storage.getToken();
-    if (token == null) return false;
+    if (token == null) return;
 
-    var fullUrl = Uri.parse(baseUrl + 'refresh');
-    var response = await http.get(
-      fullUrl,
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer $token',
-      },
-    );
-    print('Refresh HTTP Response: $response');
-
-    if (response.statusCode == 200) {
-      var data = json.decode(response.body);
-      await Storage.setToken(data['access_token']);
-      return true;
-    }
-    return false;
-  }
-
-  // Future<Map<String, dynamic>?> getUserDetails() async {
-  //   var token = await Storage.getToken();
-  //   if (token == null) return null;
-
-  //   var response = await http.get(
-  //     Uri.parse(baseUrl + 'me'),
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //       'Authorization': 'Bearer $token',
-  //     },
-  //   );
-
-  //   if (response.statusCode == 200) {
-  //     return json.decode(response.body);
-  //   }
-  //   return null;
-  // }
-
-    Future<User?> getUserDetails() async {
-    var token = await Storage.getToken();
-    if (token == null) return null;
-
-    var fullUrl = Uri.parse(baseUrl + 'me');
+    var fullUrl = Uri.parse('${baseUrl}me');
     var response = await http.get(
       fullUrl,
       headers: {
@@ -132,8 +59,13 @@ class AuthApiService {
     );
 
     if (response.statusCode == 200) {
-      return User.fromJson(json.decode(response.body));
+      _currentUser = User.fromJson(json.decode(response.body));
     }
-    return null;
+  }
+
+  Future<User?> getUserDetails() async {
+    if (_currentUser != null) return _currentUser; 
+    await _fetchUserDetails();
+    return _currentUser; 
   }
 }

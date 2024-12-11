@@ -16,59 +16,55 @@ class BottomNavbar extends StatelessWidget {
     return BottomNavigationBar(
       type: BottomNavigationBarType.fixed,
       currentIndex: selectedIndex,
-      onTap: onItemTapped, // Menangani saat item navbar dipilih
+      onTap: onItemTapped, 
       items: <BottomNavigationBarItem>[
         BottomNavigationBarItem(
           icon: Icon(
             Icons.home,
-            size: 24, // Ukuran ikon
-            color: selectedIndex == 0 ? Colors.teal : Colors.black, // Mengubah warna ikon saat dipilih
+            size: 24, 
+            color: selectedIndex == 0 ? Colors.teal : Colors.black, 
           ),
           label: 'Home',
           tooltip: 'Home',
         ),
         BottomNavigationBarItem(
           icon: Icon(
-            Icons.favorite_border, // Ikon Wishlist
-            size: 24, // Ukuran ikon
-            color: selectedIndex == 1 ? Colors.teal : Colors.black, // Mengubah warna ikon saat dipilih
+            Icons.favorite_border, 
+            size: 24, 
+            color: selectedIndex == 1 ? Colors.teal : Colors.black,
           ),
           label: 'Wishlist',
           tooltip: 'Wishlist',
         ),
         BottomNavigationBarItem(
           icon: Icon(
-            Icons.payment, // Ikon Transaksi
-            size: 24, // Ukuran ikon
-            color: selectedIndex == 2 ? Colors.teal : Colors.black, // Mengubah warna ikon saat dipilih
+            Icons.payment,
+            size: 24, 
+            color: selectedIndex == 2 ? Colors.teal : Colors.black, 
           ),
           label: 'Transaksi',
           tooltip: 'Transaksi',
         ),
         BottomNavigationBarItem(
           icon: Icon(
-            Icons.account_circle, // Ikon Profile
-            size: 24, // Ukuran ikon
-            color: selectedIndex == 3 ? Colors.teal : Colors.black, // Mengubah warna ikon saat dipilih
+            Icons.account_circle,
+            size: 24, 
+            color: selectedIndex == 3 ? Colors.teal : Colors.black, 
           ),
           label: 'Profile',
           tooltip: 'Profile',
         ),
       ],
-      // Menyesuaikan ukuran dan warna label saat dipilih
       selectedLabelStyle: const TextStyle(
-        fontSize: 12, // Ukuran font label saat terpilih
-        color: Colors.teal, // Warna label saat terpilih
-        fontWeight: FontWeight.bold, // Gaya font tebal saat terpilih
+        fontSize: 12, 
+        color: Colors.teal, 
+        fontWeight: FontWeight.bold,
       ),
-      // Menyesuaikan ukuran dan warna label saat tidak dipilih
       unselectedLabelStyle: const TextStyle(
-        fontSize: 10, // Ukuran font label saat tidak terpilih
-        color: Colors.black, // Warna label saat tidak terpilih
+        fontSize: 10,
+        color: Colors.black,
       ),
-      // Mengatur warna ikon yang tidak dipilih menjadi hitam
       unselectedItemColor: Colors.black,
-      // Mengatur warna ikon yang dipilih menjadi teal
       selectedItemColor: Colors.teal,
     );
   }

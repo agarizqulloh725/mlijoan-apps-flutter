@@ -5,7 +5,7 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
   final Function onCart;
   final Function onMessage;
 
-  MyAppBar({required this.onSearch, required this.onCart, required this.onMessage});
+  const MyAppBar({super.key, required this.onSearch, required this.onCart, required this.onMessage});
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +17,7 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Expanded(
-              child: Container(
+              child: SizedBox(
                 height: 35,
                 child: TextField(
                   decoration: InputDecoration(
@@ -29,7 +29,7 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
                     ),
                     filled: true,
                     fillColor: Colors.white.withAlpha(235),
-                    contentPadding: EdgeInsets.symmetric(horizontal: 10),
+                    contentPadding: const EdgeInsets.symmetric(horizontal: 10),
                   ),
                   style: const TextStyle(
                     color: Colors.black,   
@@ -72,7 +72,7 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
             top: 0,
             child: Container(
               padding: const EdgeInsets.all(4),
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 color: Colors.red,
                 shape: BoxShape.circle,
               ),
@@ -92,5 +92,5 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
   }
 
   @override
-  Size get preferredSize => Size.fromHeight(kToolbarHeight);
+  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 }

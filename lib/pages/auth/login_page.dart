@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import '../../services/auth_api_service.dart';
-import '../../pages/home_screen.dart';
+import '../home_screen.dart';
 import 'package:provider/provider.dart';
 
 class LoginPage extends StatefulWidget {
+  const LoginPage({super.key});
+
   @override
   _LoginPageState createState() => _LoginPageState();
 }
@@ -15,7 +17,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Login")),
+      appBar: AppBar(title: const Text("Login")),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Column(
@@ -23,17 +25,17 @@ class _LoginPageState extends State<LoginPage> {
           children: [
             TextField(
               controller: _identifierController,
-              decoration: InputDecoration(labelText: 'email / phone'),
+              decoration: const InputDecoration(labelText: 'email / phone'),
             ),
             TextField(
               controller: _passwordController,
-              decoration: InputDecoration(labelText: 'Password'),
+              decoration: const InputDecoration(labelText: 'Password'),
               obscureText: true,
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             ElevatedButton(
               onPressed: () => _login(context),
-              child: Text('Login'),
+              child: const Text('Login'),
             ),
           ],
         ),
@@ -57,19 +59,19 @@ void _login(BuildContext context) async {
       print("Login successful, navigating to home screen.");
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => HomeScreen()), // Navigate to HomeScreen on successful login
+        MaterialPageRoute(builder: (context) => const HomeScreen()), // Navigate to HomeScreen on successful login
       );
     } else {
       print("Login failed, showing snackbar.");
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Login Failed'))
+        const SnackBar(content: Text('Login Failed'))
       ); // Show snackbar on failed login
     }
   } catch (e) {
     // Handle errors like Provider not found or any exceptions from the AuthApiService
     print("An error occurred during login: $e");
     ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text('An error occurred during login. Please try again.'))
+      const SnackBar(content: Text('An error occurred during login. Please try again.'))
     );
   }
 }

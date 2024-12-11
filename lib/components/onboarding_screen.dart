@@ -3,13 +3,15 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../pages/home_screen.dart';
 
 class OnboardingScreen extends StatefulWidget {
+  const OnboardingScreen({super.key});
+
   @override
   _OnboardingScreenState createState() => _OnboardingScreenState();
 }
 
 class _OnboardingScreenState extends State<OnboardingScreen> {
   int currentPage = 0;
-  PageController _pageController = PageController(initialPage: 0);
+  final PageController _pageController = PageController(initialPage: 0);
   late Future<SharedPreferences> _prefs;
 
   @override
@@ -51,7 +53,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             ),
           ),
           buildPageIndicator(),
-          currentPage == 1 ? buildBottomSheet() : SizedBox(height: 60),
+          currentPage == 1 ? buildBottomSheet() : const SizedBox(height: 60),
         ],
       ),
     );
@@ -63,9 +65,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           Image.asset(image),
-          SizedBox(height: 20),
-          Text(title, style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
-          SizedBox(height: 15),
+          const SizedBox(height: 20),
+          Text(title, style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
+          const SizedBox(height: 15),
           Text(body, textAlign: TextAlign.center),
         ],
       ),
@@ -81,8 +83,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
   Widget buildDot({required int index}) {
     return AnimatedContainer(
-      duration: Duration(milliseconds: 200),
-      margin: EdgeInsets.only(right: 5),
+      duration: const Duration(milliseconds: 200),
+      margin: const EdgeInsets.only(right: 5),
       height: 6,
       width: currentPage == index ? 20 : 6,
       decoration: BoxDecoration(
@@ -93,15 +95,15 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   }
 
   Widget buildBottomSheet() {
-    return Container(
+    return SizedBox(
       height: 60,
       width: double.infinity,
       child: ElevatedButton(
-        child: Text('Get Started'),
+        child: const Text('Get Started'),
         onPressed: () async {
           await setSeenOnboard();
           Navigator.of(context).pushReplacement(
-            MaterialPageRoute(builder: (context) => HomeScreen())
+            MaterialPageRoute(builder: (context) => const HomeScreen())
           );
         },
       ),
