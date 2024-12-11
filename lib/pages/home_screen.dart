@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../services/auth_api_service.dart';
 import 'package:provider/provider.dart';
 import '../pages/auth/login_page.dart';
+import '../models/user.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -9,25 +10,26 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  String? userName;
+  User? currentUser;
 
   @override
   void initState() {
     super.initState();
-    _checkLoggedInUser();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _checkLoggedInUser();
+    });
   }
 
   void _checkLoggedInUser() async {
     var userDetails = await Provider.of<AuthApiService>(context, listen: false).getUserDetails();
     if (userDetails != null) {
       setState(() {
-        userName = userDetails['name'];
+        currentUser = userDetails;
       });
     }
   }
 
   void _navigateToLogin() {
-    // Menggunakan Navigator.push untuk berpindah langsung ke LoginPage
     Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => LoginPage()),
@@ -46,11 +48,11 @@ class _HomeScreenState extends State<HomeScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
-              userName != null ? 'Welcome $userName!' : 'No logged in user',
+              currentUser != null ? 'Welcome ${currentUser!.name}!' : 'No logged in user',
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
             SizedBox(height: 20),
-            if (userName == null) // Tombol hanya muncul jika tidak ada user yang login
+            if (currentUser == null)
               ElevatedButton(
                 onPressed: _navigateToLogin,
                 child: Text('Login'),
