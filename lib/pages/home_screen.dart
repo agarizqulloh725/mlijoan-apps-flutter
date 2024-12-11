@@ -58,7 +58,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final currentUser = Provider.of<AuthApiService>(context).currentUser;
 
     return Scaffold(
       appBar: _selectedIndex == 3
