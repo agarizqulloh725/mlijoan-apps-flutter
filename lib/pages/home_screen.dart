@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../services/auth_api_service.dart';
 import 'package:provider/provider.dart';
+import '../services/auth_api_service.dart';
 import '../pages/auth/login_page.dart';
 import '../models/user.dart';
 import '../components/appbar.dart';
@@ -51,14 +51,22 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: MyAppBar(
-        onSearch: _onSearch,
-        onCart: _onCart,
-        onMessage: _onMessage,
+Widget build(BuildContext context) {
+  return Scaffold(
+    appBar: MyAppBar(
+      onSearch: _onSearch,
+      onCart: _onCart,
+      onMessage: _onMessage,
+    ),
+    body: Container(
+      decoration: const BoxDecoration(
+        image: DecorationImage(
+          image: AssetImage('assets/images/bg2.png'),
+          fit: BoxFit.cover,
+          alignment: Alignment.center,
+        ),
       ),
-      body: Center(
+      child: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
@@ -85,6 +93,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ],
         ),
       ),
-    );
-  }
+    ),
+  );
+}
 }

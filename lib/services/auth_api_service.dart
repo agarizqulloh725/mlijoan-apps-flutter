@@ -4,13 +4,13 @@ import '../utils/storage.dart';
 import '../models/user.dart';
 
 class AuthApiService {
-  final String baseUrl = "http://10.0.2.2:8000/api/v1/auth/";
+  final String baseUrl = "https://api.mlijoan.com/api/v1/auth/";
 
-  Future<bool> login(String email, String password) async {
+  Future<bool> login(String identifier, String password) async {
     var fullUrl = Uri.parse(baseUrl + 'login');
     print('Request URL: $fullUrl');
 
-    var requestBody = jsonEncode({'email': email, 'password': password});
+    var requestBody = jsonEncode({'identifier': identifier, 'password': password});
     print('Request Body: $requestBody');
     var response = await http.post(
       fullUrl,

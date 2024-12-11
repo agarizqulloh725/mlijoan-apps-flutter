@@ -9,7 +9,7 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _identifierController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
   @override
@@ -22,8 +22,8 @@ class _LoginPageState extends State<LoginPage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             TextField(
-              controller: _emailController,
-              decoration: InputDecoration(labelText: 'Email'),
+              controller: _identifierController,
+              decoration: InputDecoration(labelText: 'email / phone'),
             ),
             TextField(
               controller: _passwordController,
@@ -44,14 +44,14 @@ class _LoginPageState extends State<LoginPage> {
 void _login(BuildContext context) async {
   try {
     print("Login button clicked");
-    final authApi = Provider.of<AuthApiService>(context, listen: false);  // Fetch the AuthApiService instance
+    final authApi = Provider.of<AuthApiService>(context, listen: false);  
 
     bool success = await authApi.login(
-      _emailController.text,
+      _identifierController.text,
       _passwordController.text,
     );
 
-    print("Login attempt status: $success");  // Debug console output for login status.
+    print("Login attempt status: $success");  
 
     if (success) {
       print("Login successful, navigating to home screen.");
