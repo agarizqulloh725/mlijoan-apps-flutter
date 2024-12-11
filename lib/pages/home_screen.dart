@@ -3,8 +3,10 @@ import '../services/auth_api_service.dart';
 import 'package:provider/provider.dart';
 import '../pages/auth/login_page.dart';
 import '../models/user.dart';
+import '../components/appbar.dart';
 
 class HomeScreen extends StatefulWidget {
+  const HomeScreen({super.key});
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
@@ -36,12 +38,25 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
+  void _onSearch(String value) {
+    // Handle search functionality
+  }
+
+  void _onCart() {
+    // Handle cart button press
+  }
+
+  void _onMessage() {
+    // Handle message button press
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Home Screen"),
-        centerTitle: true,
+      appBar: MyAppBar(
+        onSearch: _onSearch,
+        onCart: _onCart,
+        onMessage: _onMessage,
       ),
       body: Center(
         child: Column(
@@ -49,27 +64,23 @@ class _HomeScreenState extends State<HomeScreen> {
           children: <Widget>[
             Text(
               currentUser != null ? 'Welcome ${currentUser!.name}!' : 'No logged in user',
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+              style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             if (currentUser == null)
               ElevatedButton(
                 onPressed: _navigateToLogin,
-                child: Text('Login'),
+                child: const Text('Login'),
               ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             ElevatedButton(
-              onPressed: () {
-                // Tambahkan aksi ketika tombol ditekan
-              },
-              child: Text('Next Page'),
+              onPressed: () {},
+              child: const Text('Next Page'),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             ElevatedButton(
-              onPressed: () {
-                // Tambahkan aksi ketika tombol ditekan
-              },
-              child: Text('Open Settings'),
+              onPressed: () {},
+              child: const Text('Open Settings'),
             ),
           ],
         ),

@@ -16,7 +16,7 @@ void main() async {
 class MyApp extends StatelessWidget {
   final bool seenOnboard;
 
-  MyApp({required this.seenOnboard});
+  const MyApp({required this.seenOnboard});
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +28,8 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.blue,
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
-        home: seenOnboard ? HomeScreen() : OnboardingScreen(),
+        debugShowCheckedModeBanner: false,
+        home: seenOnboard ? const HomeScreen() : OnboardingScreen(),
       ),
     );
   }
