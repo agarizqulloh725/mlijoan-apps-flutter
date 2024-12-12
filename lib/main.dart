@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'utils/shared_preferences_manager.dart';
 import 'components/onboarding_screen.dart';
 import 'home_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  SharedPreferences prefs = await SharedPreferences.getInstance();
-  bool seenOnboard = prefs.getBool('seenOnboard') ?? false;
+  bool seenOnboard = await SharedPreferencesManager.getBool('seenOnboard') ?? false;
 
   runApp(MyApp(seenOnboard: seenOnboard));
 }

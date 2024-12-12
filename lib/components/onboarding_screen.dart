@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import '../home_screen.dart';
+import '../utils/shared_preferences_manager.dart';
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});
@@ -12,18 +12,6 @@ class OnboardingScreen extends StatefulWidget {
 class _OnboardingScreenState extends State<OnboardingScreen> {
   int currentPage = 0;
   final PageController _pageController = PageController(initialPage: 0);
-  late Future<SharedPreferences> _prefs;
-
-  @override
-  void initState() {
-    super.initState();
-    _prefs = SharedPreferences.getInstance();
-  }
-
-  Future<void> setSeenOnboard() async {
-    final SharedPreferences prefs = await _prefs;
-    await prefs.setBool('seenOnboard', true);
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -59,6 +47,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     );
   }
 
+  // Konten untuk setiap halaman onboarding
   Widget buildPageContent({required String title, required String body, required String image}) {
     return Center(
       child: Column(
@@ -74,6 +63,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     );
   }
 
+  // Menampilkan indikator halaman onboarding
   Widget buildPageIndicator() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
@@ -81,6 +71,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     );
   }
 
+  // Membuat dot indikator untuk page view
   Widget buildDot({required int index}) {
     return AnimatedContainer(
       duration: const Duration(milliseconds: 200),
@@ -94,6 +85,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     );
   }
 
+  // Membuat tombol "Get Started" di halaman onboarding terakhir
   Widget buildBottomSheet() {
     return SizedBox(
       height: 60,
@@ -101,9 +93,12 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       child: ElevatedButton(
         child: const Text('Get Started'),
         onPressed: () async {
-          await setSeenOnboard();
+          // Menyimpan status onboarding telah dilihat menggunakan SharedPreferencesManager
+          await SharedPreferencesManager.saveBool('seenOnboard', true);
+          
+          // Arahkan ke halaman utama
           Navigator.of(context).pushReplacement(
-            MaterialPageRoute(builder: (context) => const HomeScreen())
+            MaterialPageRoute(builder: (context) => const HomeScreen()),
           );
         },
       ),
