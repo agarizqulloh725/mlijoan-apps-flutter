@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import '../../services/auth_api_service.dart';
 import '../../home_screen.dart';
 
@@ -19,12 +18,11 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
-        // Jika user ingin menekan tombol kembali, arahkan ke HomeScreen
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(builder: (context) => const HomeScreen()),
         );
-        return false; // Mencegah aksi kembali default
+        return false;
       },
       child: Scaffold(
         appBar: AppBar(title: const Text("Login")),
@@ -74,8 +72,7 @@ class _LoginPageState extends State<LoginPage> {
         _isLoading = true;
       });
 
-      final authApi = Provider.of<AuthApiService>(context, listen: false);  
-
+      final authApi = AuthApiService();
       bool success = await authApi.login(identifier, password);
 
       setState(() {
@@ -83,11 +80,10 @@ class _LoginPageState extends State<LoginPage> {
       });
 
       if (success) {
-        // Menggunakan pushAndRemoveUntil untuk menghapus semua halaman sebelumnya (termasuk login)
         Navigator.pushAndRemoveUntil(
           context,
           MaterialPageRoute(builder: (context) => const HomeScreen()),
-          (Route<dynamic> route) => false, // Menghapus semua halaman sebelumnya
+          (Route<dynamic> route) => false,
         );
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
@@ -96,7 +92,7 @@ class _LoginPageState extends State<LoginPage> {
       }
     } catch (e) {
       setState(() {
-        _isLoading = false; 
+        _isLoading = false;
       });
 
       ScaffoldMessenger.of(context).showSnackBar(
