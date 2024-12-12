@@ -8,7 +8,6 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Mengakses currentUser dari provider
     final currentUser = Provider.of<AuthApiService>(context).currentUser;
 
     return Container(

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../services/auth_api_service.dart';
-import '../components/appbar.dart';
-import '../components/navbar.dart';
-import 'profile_page.dart';
-import 'home_page.dart';
-import 'transactions_page.dart';
-import 'wishlist_page.dart';
+import 'services/auth_api_service.dart';
+import 'components/appbar.dart';
+import 'components/navbar.dart';
+import 'pages/profile_page.dart';
+import 'pages/home_page.dart';
+import 'pages/transactions_page.dart';
+import 'pages/wishlist_page.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
