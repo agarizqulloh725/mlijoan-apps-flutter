@@ -2,6 +2,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import '../utils/storage.dart';
 import '../models/user.dart';
+import '../utils/shared_preferences_manager.dart';
 
 class AuthApiService {
   final String baseUrl = "https://api.mlijoan.com/api/v1/auth/";
@@ -22,6 +23,7 @@ class AuthApiService {
     if (response.statusCode == 200) {
       var data = json.decode(response.body);
       await Storage.setToken(data['access_token']);
+      await SharedPreferencesManager.saveBool("isLoggedIn", true);
       await _fetchUserDetails();
       return true;
     } else {
@@ -42,6 +44,7 @@ class AuthApiService {
       );
     }
     await Storage.deleteToken();
+    await SharedPreferencesManager.saveBool("isLoggedIn", false);
     _currentUser = null;
   }
 

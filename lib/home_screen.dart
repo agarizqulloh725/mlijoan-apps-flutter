@@ -6,7 +6,7 @@ import 'pages/home_page.dart';
 import 'pages/transactions_page.dart';
 import 'pages/wishlist_page.dart';
 import 'pages/auth/login_page.dart';
-import '../utils/storage.dart';
+import 'utils/shared_preferences_manager.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -33,9 +33,9 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   void _checkLoggedInUser() async {
-    var token = await Storage.getToken();
+    bool? isLoggedIn = await SharedPreferencesManager.getBool("isLoggedIn");
     setState(() {
-      _isUserLoggedIn = token != null;
+      _isUserLoggedIn = isLoggedIn ?? false;
     });
   }
 
