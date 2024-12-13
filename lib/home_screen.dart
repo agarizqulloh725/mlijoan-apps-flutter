@@ -68,9 +68,15 @@ class _HomeScreenState extends State<HomeScreen> {
               onMessage: () {},
             ),
       body: _screens[_selectedIndex],
-      bottomNavigationBar: BottomNavbar(
-        selectedIndex: _selectedIndex,
-        onItemTapped: _onItemTapped,
+      bottomNavigationBar: Theme(
+          data: ThemeData(
+            splashColor: Colors.transparent,
+            highlightColor: Colors.transparent,
+          ),
+          child: BottomNavbar(
+              selectedIndex: _selectedIndex,
+              onItemTapped: _onItemTapped,
+            ),
       ),
     );
   }
