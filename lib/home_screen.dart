@@ -6,6 +6,8 @@ import 'pages/home_page.dart';
 import 'pages/transactions_page.dart';
 import 'pages/wishlist_page.dart';
 import 'pages/auth/login_page.dart';
+import 'pages/cart_page.dart';
+import 'pages/message_page.dart';
 import 'utils/shared_preferences_manager.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -64,8 +66,8 @@ class _HomeScreenState extends State<HomeScreen> {
           ? null
           : MyAppBar(
               onSearch: (value) {},
-              onCart: () {},
-              onMessage: () {},
+              onCart: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const CartPage())),
+              onMessage: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const MessagePage())),
             ),
       body: _screens[_selectedIndex],
       bottomNavigationBar: Theme(

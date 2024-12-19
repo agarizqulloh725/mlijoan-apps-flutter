@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
-  final Function onSearch;
-  final Function onCart;
-  final Function onMessage;
+  final Function(String) onSearch;
+  final VoidCallback onCart;
+  final VoidCallback onMessage;
 
   const MyAppBar({super.key, required this.onSearch, required this.onCart, required this.onMessage});
 
@@ -55,7 +55,7 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
     );
   }
 
-  Widget _buildIconButton(IconData icon, Function onPressed) {
+  Widget _buildIconButton(IconData icon, VoidCallback onPressed) {
     return SizedBox(
       height: 40,
       width: 40,
