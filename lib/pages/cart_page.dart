@@ -109,14 +109,14 @@ class CartItem extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 ListTile(
-                  title: Text(title, style: const TextStyle(fontSize: 12.0), maxLines: 1, overflow: TextOverflow.ellipsis),
+                  title: Text(title, style: const TextStyle(fontSize: 14.0), maxLines: 1, overflow: TextOverflow.ellipsis),
                   subtitle: RichText(
                     text: TextSpan(
                       style: const TextStyle(color: Colors.black),
                       children: [
-                        const TextSpan(text: 'Rp 15.000', style: TextStyle(color: Color.fromARGB(255, 0, 0, 0), fontWeight: FontWeight.w900, fontSize: 12.0)),
+                        const TextSpan(text: 'Rp 15.000', style: TextStyle(color: Color.fromARGB(255, 0, 0, 0), fontWeight: FontWeight.w900, fontSize: 13.0)),
                         const WidgetSpan(child: SizedBox(width: 8)),
-                        TextSpan(text: subtitle, style: const TextStyle(decoration: TextDecoration.lineThrough, color: Colors.grey, fontSize: 11.0)),
+                        TextSpan(text: subtitle, style: const TextStyle(decoration: TextDecoration.lineThrough, color: Colors.grey, fontSize: 10.0)),
                       ],
                     ),
                   ),

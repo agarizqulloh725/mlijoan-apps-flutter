@@ -129,9 +129,9 @@ class TransactionListItem extends StatelessWidget {
                                       child: const Text(
                                         '30 September 2024',
                                         style: TextStyle(
-                                          fontSize: 8.0,
+                                          fontSize: 8.5,
                                           letterSpacing: 0.0,
-                                          color: Color(0xFFAAAAAA)
+                                          color: Color.fromARGB(255, 120, 120, 120)
                                         ),
                                       ),
                                     ),
@@ -187,13 +187,14 @@ class TransactionListItem extends StatelessWidget {
                     width: double.infinity,
                     height: 1.0,
                     decoration: BoxDecoration(
-                      color: const Color(0xFFAAAAAA),
+                      color: const Color.fromARGB(92, 170, 170, 170),
                       border: Border.all(
-                        color: const Color(0xFFAAAAAA),
+                        color: const Color.fromARGB(0, 170, 170, 170),
                       ),
                     ),
                   ),
                 ),
+                const SizedBox(height: 2),
                 Container(
                     width: double.infinity,
                     decoration: const BoxDecoration(
@@ -235,7 +236,8 @@ class TransactionListItem extends StatelessWidget {
                                   style: TextStyle(
                                     fontSize: 10.0,
                                     letterSpacing: 0.0,
-                                    fontWeight: FontWeight.w600,
+                                    fontWeight: FontWeight.w400,
+                                    color: Color.fromARGB(255, 120, 120, 120)
                                   ),
                                 ),
                               ],
@@ -269,10 +271,10 @@ class TransactionListItem extends StatelessWidget {
                                 child: Text(
                                   'Total Belanja',
                                   style: TextStyle(
-                                    color: Color(0xFFAAAAAA),
+                                    color: Color.fromARGB(255, 120, 120, 120),
                                     fontSize: 10.0,
                                     letterSpacing: 0.0,
-                                    fontWeight: FontWeight.w500,
+                                    fontWeight: FontWeight.w400,
                                   ),
                                 ),
                               ),
