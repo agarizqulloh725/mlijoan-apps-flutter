@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:google_fonts/google_fonts.dart';
+
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -31,9 +33,36 @@ class HomePage extends StatelessWidget {
                 items: imageSliders(context),
               ),
             ),
-            ElevatedButton(
-              onPressed: () {},
-              child: const Text('Next Page'),
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Padding(
+                padding: const EdgeInsets.all(10),
+                child: Text(
+                  "Kategori",
+                  style: GoogleFonts.poppins(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    color: const Color.fromARGB(150, 0, 0, 0)
+                  ),
+                ),
+              ),
+            ),
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Padding(
+                padding: const EdgeInsets.only(left: 10, right: 10),
+                child: Wrap(
+                  spacing: 10,
+                  children: <Widget>[
+                      categoryButton(context, "Sayuran", Icons.eco, const Color.fromARGB(100, 139, 195, 74)),
+                      categoryButton(context, "Daging", Icons.restaurant, const Color.fromARGB(100, 33, 149, 243)),
+                      categoryButton(context, "Buah", Icons.apple, const Color.fromARGB(100, 76, 175, 79)), 
+                      categoryButton(context, "Bumbu", Icons.local_dining, const Color.fromARGB(100, 244, 67, 54)), 
+                      categoryButton(context, "Lainnya", Icons.more_horiz, const Color.fromARGB(100, 158, 158, 158)), 
+                  ],
+
+                ),
+              ),
             ),
             ElevatedButton(
               onPressed: () {},
@@ -45,6 +74,40 @@ class HomePage extends StatelessWidget {
     );
   }
 
+Widget categoryButton(BuildContext context, String label, IconData icon, Color color) {
+  double width = MediaQuery.of(context).size.width / 4; 
+  return SizedBox(
+    width: width - 12,
+    child: ElevatedButton(
+    onPressed: () {
+        debugPrint('Button pressed: $label');
+      },
+      style: ElevatedButton.styleFrom(
+        shadowColor: color,
+        backgroundColor: color,
+        foregroundColor: Colors.white,
+        minimumSize: Size(width, 80),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10),
+        ),
+        padding: EdgeInsets.symmetric(vertical: 10),
+      ),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          Icon(icon, color: Colors.white), 
+          Text(label, style: TextStyle(color: Colors.white)), 
+        ],
+      ),
+    ),
+  );
+}
+
+
+
+
+
+
 List<Widget> imageSliders(BuildContext context) => [
   InkWell(
     onTap: () {
@@ -55,7 +118,8 @@ List<Widget> imageSliders(BuildContext context) => [
       child: ClipRRect(
         borderRadius: BorderRadius.circular(10.0),
         child: Image.network(
-          "https://149450327.v2.pressablecdn.com/wp-content/uploads/2017/04/640x360.png",
+          "https://images.ctfassets.net/wn7ipiv9ue5v/5GNali325l7StGbMK2vfjh/bf7d821c70a8d782278f2e8c6b499b0b/TS25-DLX-RETAIL-DIGITAL-BANNERS-D2C-640x360.jpg",
+          // "https://149450327.v2.pressablecdn.com/wp-content/uploads/2017/04/640x360.png",
           fit: BoxFit.cover,
         ),
       ),
@@ -77,7 +141,6 @@ List<Widget> imageSliders(BuildContext context) => [
     ),
   ),
 ];
-
 }
 
 class DetailPage extends StatelessWidget {
