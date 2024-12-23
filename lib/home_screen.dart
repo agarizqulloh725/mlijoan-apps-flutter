@@ -22,7 +22,7 @@ class _HomeScreenState extends State<HomeScreen> {
   bool _isUserLoggedIn = false;
 
   final List<Widget> _screens = [
-    const HomePage(),
+    HomePage(),
     const WishlistPage(),
     const TransactionsPage(),
     const ProfilePage(),
