@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../widgets/flashsale.dart';
+
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -36,13 +38,13 @@ class HomePage extends StatelessWidget {
             Align(
               alignment: Alignment.centerLeft,
               child: Padding(
-                padding: const EdgeInsets.all(10),
+                padding: EdgeInsets.only(top: 5, bottom: 5, left: 10, right: 10),
                 child: Text(
                   "Kategori",
                   style: GoogleFonts.poppins(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                    color: const Color.fromARGB(150, 0, 0, 0)
+                    fontSize: 17,
+                    fontWeight: FontWeight.w800,
+                    color: const Color.fromARGB(170, 0, 0, 0)
                   ),
                 ),
               ),
@@ -64,6 +66,9 @@ class HomePage extends StatelessWidget {
                 ),
               ),
             ),
+            const SizedBox(height: 10),
+            flashSaleSection(),
+            const SizedBox(height: 5),
             ElevatedButton(
               onPressed: () {},
               child: const Text('Open Settings'),
@@ -102,10 +107,6 @@ Widget categoryButton(BuildContext context, String label, IconData icon, Color c
     ),
   );
 }
-
-
-
-
 
 
 List<Widget> imageSliders(BuildContext context) => [
