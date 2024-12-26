@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'utils/shared_preferences_manager.dart';
-import 'components/onboarding_screen.dart';
-import 'home_screen.dart';
+import 'shared/utils/shared_preferences_manager.dart';
+import 'features/onboarding/presentation/pages/onboarding_screen.dart';
+import 'features/navigation/index.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

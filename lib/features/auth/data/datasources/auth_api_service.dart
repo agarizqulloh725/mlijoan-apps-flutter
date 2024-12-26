@@ -1,8 +1,8 @@
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import '../utils/storage.dart';
+import '../../../../shared/utils/storage.dart';
 import '../models/user.dart';
-import '../utils/shared_preferences_manager.dart';
+import '../../../../shared/utils/shared_preferences_manager.dart';
 
 class AuthApiService {
   final String baseUrl = "https://api.mlijoan.com/api/v1/auth/";

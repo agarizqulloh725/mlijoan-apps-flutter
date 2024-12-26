@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
-import 'components/appbar.dart';
-import 'components/navbar.dart';
-import 'pages/profile_page.dart';
-import 'pages/home_page.dart';
-import 'pages/transactions_page.dart';
-import 'pages/wishlist_page.dart';
-import 'pages/auth/login_page.dart';
-import 'pages/cart_page.dart';
-import 'pages/message_page.dart';
-import 'utils/shared_preferences_manager.dart';
+import '../../shared/widgets/appbar.dart';
+import '../../shared/widgets/navbar.dart';
+import '../auth/presentation/pages/login_page.dart';
+import '../cart/presentation/pages/cart_page.dart';
+import '../home/presentation/pages/home_page.dart';
+import '../message/presentation/pages/message_page.dart';
+import '../profile/presentation/pages/profile_page.dart';
+import '../transaction/presentation/pages/transactions_page.dart';
+import '../wishlist/presentation/pages/wishlist_page.dart';
+import '../../shared/utils/shared_preferences_manager.dart';
+
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});

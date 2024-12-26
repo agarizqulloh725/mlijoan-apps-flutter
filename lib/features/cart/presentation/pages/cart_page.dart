@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mlijoan_apps/components/navbar_cart.dart';
+import 'package:mlijoan_apps/features/cart/presentation/widgets/navbar_cart.dart';
 
 class ShoppingCartModel {
   bool? checkboxValue1 = false;
