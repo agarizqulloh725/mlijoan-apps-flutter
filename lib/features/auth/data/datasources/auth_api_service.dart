@@ -22,7 +22,7 @@ class AuthApiService {
 
     if (response.statusCode == 200) {
       var data = json.decode(response.body);
-      await Storage.setToken(data['access_token']);
+      await SecureStorage.setToken(data['access_token']);
       await SharedPreferencesManager.saveBool("isLoggedIn", true);
       await _fetchUserDetails();
       return true;
@@ -32,7 +32,7 @@ class AuthApiService {
   }
 
   Future<void> logout() async {
-    var token = await Storage.getToken();
+    var token = await SecureStorage.getToken();
     if (token != null) {
       var fullUrl = Uri.parse('${baseUrl}logout');
       await http.post(
@@ -43,13 +43,13 @@ class AuthApiService {
         },
       );
     }
-    await Storage.deleteToken();
+    await SecureStorage.deleteToken();
     await SharedPreferencesManager.saveBool("isLoggedIn", false);
     _currentUser = null;
   }
 
   Future<void> _fetchUserDetails() async {
-    var token = await Storage.getToken();
+    var token = await SecureStorage.getToken();
     if (token == null) return;
 
     var fullUrl = Uri.parse('${baseUrl}me');
